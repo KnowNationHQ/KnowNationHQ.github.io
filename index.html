@@ -161,16 +161,28 @@
     .guarantee-item p{font-size:0.82rem;color:var(--text-light);line-height:1.5}
 
     /* Services */
-    .services-list{display:flex;flex-direction:column;gap:14px}
+    .services-list{display:flex;flex-direction:column;gap:16px}
     .service-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;transition:var(--transition);position:relative;overflow:hidden}
-    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease}
-    .service-card:hover{box-shadow:0 8px 32px rgba(8,145,178,0.06)}
-    .service-card:hover::before{transform:scaleX(1)}
-    .service-card .icon{font-size:1.4rem;margin-bottom:8px}
-    .service-card h3{font-size:0.92rem;font-weight:700;margin-bottom:4px}
-    .service-card p{font-size:0.82rem;color:var(--text-muted);line-height:1.6}
-    .service-card .tech{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-    .service-card .tech span{font-size:0.68rem;padding:3px 8px;border-radius:4px;background:var(--accent-glow);color:var(--accent);font-weight:500}
+    .service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,145,178,0.02),transparent 60%);opacity:0;transition:opacity 0.4s ease;pointer-events:none}
+    .service-card:hover{box-shadow:0 12px 40px rgba(8,145,178,0.06);border-color:rgba(8,145,178,0.2);transform:translateY(-2px)}
+    .service-card:hover::before{opacity:1}
+    .service-card .num{font-size:0.65rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;opacity:0.6}
+    .service-card .icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:12px;background:var(--accent-glow)}
+    .service-card h3{font-size:0.95rem;font-weight:700;margin-bottom:6px}
+    .service-card p{font-size:0.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:12px}
+    .service-card .tech{display:flex;gap:6px;flex-wrap:wrap}
+    .service-card .tech span{font-size:0.65rem;padding:3px 9px;border-radius:6px;background:var(--accent-glow);color:var(--accent);font-weight:500}
+    .service-card .price-anchor{display:inline-block;font-size:0.72rem;font-weight:600;color:var(--text-muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--border);width:100%}
+    .service-card .price-anchor strong{color:var(--accent)}
+    @media(min-width:640px){
+      .services-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+      .service-card{padding:28px 24px}
+    }
+    @media(min-width:900px){
+      .services-list{grid-template-columns:repeat(4,1fr);gap:20px}
+      .service-card{padding:32px 24px}
+      .service-card .icon-wrap{width:44px;height:44px;font-size:1.3rem}
+    }
 
     /* Portfolio */
     .project-grid{display:flex;flex-direction:column;gap:20px}
@@ -467,28 +479,36 @@
     </div>
     <div class="services-list reveal">
       <div class="service-card">
-        <div class="icon">&#x1F916;</div>
-        <h3>Agentic Web &amp; SaaS Development</h3>
-        <p>Full-stack web applications, SaaS platforms, and dashboards built by autonomous AI pipelines. Next.js, Supabase, React, Node.js.</p>
+        <div class="num">01</div>
+        <div class="icon-wrap">&#x1F916;</div>
+        <h3>Agentic Web &amp; SaaS</h3>
+        <p>Full-stack web apps, SaaS platforms, and dashboards built by autonomous AI pipelines. Next.js, Supabase, React, TypeScript.</p>
         <div class="tech"><span>Next.js</span><span>Supabase</span><span>React</span><span>TypeScript</span></div>
+        <div class="price-anchor">Starting at <strong>&#x20A6;500k</strong></div>
       </div>
       <div class="service-card">
-        <div class="icon">&#x20A6;</div>
-        <h3>Naira-Proof Payment Integration</h3>
+        <div class="num">02</div>
+        <div class="icon-wrap">&#x20A6;</div>
+        <h3>Naira-Proof Payments</h3>
         <p>Native Monnify, Squad, and Paystack integration. Subscription billing, invoicing, and reconciliation — localised for Nigeria.</p>
         <div class="tech"><span>Monnify</span><span>Squad</span><span>Paystack</span><span>Node.js</span></div>
+        <div class="price-anchor">Starting at <strong>&#x20A6;350k</strong></div>
       </div>
       <div class="service-card">
-        <div class="icon">&#x1F3AC;</div>
-        <h3>AI Video &amp; Image Generation</h3>
+        <div class="num">03</div>
+        <div class="icon-wrap">&#x1F3AC;</div>
+        <h3>AI Video &amp; Image Gen</h3>
         <p>Higgsfield, Veo 3, Seedance 2.0 — AI-generated video content, avatars, lipsync, and UGC for marketing and product demos.</p>
         <div class="tech"><span>Higgsfield</span><span>Veo 3</span><span>Seedance 2.0</span><span>Wan</span></div>
+        <div class="price-anchor">Starting at <strong>&#x20A6;250k</strong></div>
       </div>
       <div class="service-card">
-        <div class="icon">&#x1F4F1;</div>
-        <h3>PWAs &amp; Telegram Mini Apps</h3>
+        <div class="num">04</div>
+        <div class="icon-wrap">&#x1F4F1;</div>
+        <h3>PWAs &amp; Telegram Apps</h3>
         <p>Offline-first progressive web apps and Telegram Mini Apps with integrated payments, user management, and real-time features.</p>
         <div class="tech"><span>PWA</span><span>Telegram API</span><span>Supabase</span><span>Realtime</span></div>
+        <div class="price-anchor">Starting at <strong>&#x20A6;400k</strong></div>
       </div>
     </div>
   </div>
@@ -536,14 +556,14 @@
         </div>
       </div>
       <div class="project-card">
-        <img src="quillscroll-thumb.jpg" alt="Quillscroll" loading="lazy">
+        <img src="resume-portfolio-thumb.jpg" alt="Resume Portfolio 001" loading="lazy">
         <div class="body">
-          <span class="tag internal">Side Project</span>
-          <h3>Quillscroll</h3>
-          <div class="meta">UI-first blogging platform for modern creators. Markdown editor, auth, dark mode, fully mobile responsive.</div>
+          <span class="tag client">Client</span>
+          <h3>Resume Portfolio 001</h3>
+          <div class="meta">Premium conversion-optimised portfolio &amp; lead engine for a Nigerian tech professional. Vite + React 19 + Tailwind CSS 4.</div>
           <div class="links">
-            <a href="https://quillscroll.lovable.app" target="_blank">Visit Site &rarr;</a>
-            <a href="https://github.com/modesignedit/quillscroll" target="_blank">Source &rarr;</a>
+            <a href="https://chioma-portfolio-kappa.vercel.app" target="_blank">Visit Site &rarr;</a>
+            <a href="https://github.com/modesignedit/Resume-Portfolio-001" target="_blank">Source &rarr;</a>
           </div>
         </div>
       </div>
