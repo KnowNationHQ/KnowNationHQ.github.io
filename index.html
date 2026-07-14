@@ -141,18 +141,23 @@
     .hero-line{stroke-dasharray:4 4;animation:dashFlow 1s linear infinite}
 
     /* Stats */
-    .stats-bar{background:var(--bg-mid);border-top:1px solid rgba(255,255,255,0.04);padding:24px 0}
-    .stats-bar .container{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
+    .stats-bar{background:var(--bg-mid);border-top:1px solid rgba(255,255,255,0.04);padding:28px 0}
+    .stats-board{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;max-width:720px;margin:0 auto;position:relative}
+    .stats-board::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,0.06),transparent 70%);pointer-events:none}
+    .stat{text-align:center;flex:1;min-width:140px;position:relative;padding:20px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;backdrop-filter:blur(4px);transition:var(--transition)}
+    .stat:hover{background:rgba(255,255,255,0.06);border-color:rgba(8,145,178,0.15);transform:translateY(-2px)}
+    .stat .ico{font-size:1.1rem;margin-bottom:6px;opacity:0.6}
+    .stat .num{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1}
+    .stat .num .accent{color:var(--accent)}
+    .stat .label{font-size:0.65rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;opacity:0.7}
+    @keyframes countPop{0%{transform:scale(0.8);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+    .stat .num.counted{animation:countPop 0.3s ease-out}
     .tech-scroll{overflow:hidden;background:var(--bg);padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
     .tech-track{display:flex;gap:28px;width:max-content;animation:scrollTech 40s linear infinite}
     .tech-track .tag{display:flex;align-items:center;gap:7px;padding:5px 14px;border:1px solid rgba(255,255,255,0.08);border-radius:5px;font-size:12px;white-space:nowrap;color:var(--fg-muted);flex-shrink:0;transition:border-color 0.3s,color 0.3s}
     .tech-track .tag:hover{border-color:var(--accent);color:var(--fg)}
     .tech-track .tag .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
     @keyframes scrollTech{to{transform:translateX(-50%)}}
-    .stat{text-align:center}
-    .stat .num{font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:-0.02em}
-    .stat .num .accent{color:var(--accent)}
-    .stat .label{font-size:0.7rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px}
 
     /* Process */
     #process{overflow:hidden}
@@ -466,9 +471,23 @@
 <!--- STATS / COST TICKER --->
 <div class="stats-bar">
   <div class="container">
-    <div class="stat reveal"><div class="num">&#x20A6;<span class="accent">3.4</span>M</div><div class="label">Avg. saved per project</div></div>
-    <div class="stat reveal"><div class="num"><span class="accent">3</span>x</div><div class="label">Faster delivery</div></div>
-    <div class="stat reveal"><div class="num"><span class="accent">0</span></div><div class="label">Cloud vendor lock-in</div></div>
+    <div class="stats-board reveal">
+      <div class="stat">
+        <div class="ico">&#x1F4B0;</div>
+        <div class="num"><span class="accent" data-count="3.4">0</span><span class="suffix">M</span> <span class="label-inline">avg. saved</span></div>
+        <div class="label">Per project delivered</div>
+      </div>
+      <div class="stat">
+        <div class="ico">&#x26A1;</div>
+        <div class="num"><span class="accent" data-count="3">0</span><span class="suffix">x</span> <span class="label-inline">faster</span></div>
+        <div class="label">Delivery speed vs. traditional</div>
+      </div>
+      <div class="stat">
+        <div class="ico">&#x1F510;</div>
+        <div class="num"><span class="accent" data-count="0">0</span> <span class="label-inline">vendor lock-in</span></div>
+        <div class="label">Full ownership. Always.</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -900,6 +919,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})
   })
 })
+
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    const target=parseFloat(el.dataset.count);
+    if(isNaN(target)){el.textContent='0';return}
+    const isDecimal=target!==Math.floor(target);
+    const dur=1500,start=performance.now();
+    function tick(now){
+      const p=Math.min((now-start)/dur,1);
+      const cur=p*target;
+      el.textContent=isDecimal?cur.toFixed(1):Math.floor(cur);
+      if(p<1)requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick);
+    el.classList.add('counted');
+    countObs.unobserve(el)
+  })
+},{threshold:0.5});
+document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
 
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
