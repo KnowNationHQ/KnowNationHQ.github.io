@@ -334,28 +334,50 @@
 
     /* Contact */
     #contact{background:var(--bg-dark);color:#fff;position:relative;overflow:hidden}
-    #contact::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:var(--accent);filter:blur(160px);opacity:0.05;top:-20%;right:-20%;pointer-events:none}
+    #contact::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,0.04),transparent 70%);top:-30%;right:-20%;pointer-events:none}
+    #contact::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(217,119,6,0.03),transparent 70%);pointer-events:none}
     #contact .section-sub{color:var(--text-light)}
-    .contact-grid{display:flex;flex-direction:column;gap:24px;position:relative;z-index:1}
-    .contact-info{display:flex;flex-direction:column;gap:8px}
-    .contact-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:14px 16px;transition:var(--transition)}
-    .contact-item:hover{background:rgba(255,255,255,0.05)}
-    .contact-item .icon{font-size:1rem;width:32px;text-align:center;flex-shrink:0}
-    .contact-item h4{font-size:0.7rem;color:var(--text-light);font-weight:500;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px}
-    .contact-item a,.contact-item span{color:#fff;font-size:0.85rem;word-break:break-word}
-    .contact-item a:hover{color:var(--accent)}
-    .contact-form{display:flex;flex-direction:column;gap:12px}
-    .contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:0.9rem;font-family:inherit;transition:var(--transition)}
-    .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,0.06);box-shadow:0 0 0 3px var(--accent-glow)}
-    .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--text-light)}
-    .contact-form textarea{min-height:100px;resize:vertical}
-    .contact-form .btn{width:100%;justify-content:center}
-    .contact-form .form-row{display:flex;flex-direction:column;gap:12px}
-    .form-success{display:none;text-align:center;padding:28px 20px}
-    .form-success.show{display:block}
-    .form-success .icon{font-size:2.2rem;margin-bottom:12px}
-    .form-success h3{font-size:1.1rem;margin-bottom:6px}
-    .form-success p{color:var(--text-light);font-size:0.88rem}
+    .contact-panel{display:grid;grid-template-columns:1fr;gap:20px;position:relative;z-index:1}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .contact-side{display:flex;flex-direction:column;gap:10px;animation:fadeUp 0.5s ease-out both}
+    .contact-side:nth-child(2){animation-delay:0.2s}
+    .contact-card{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px 14px;transition:var(--transition);text-decoration:none;color:#fff}
+    .contact-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(8,145,178,0.15);transform:translateX(3px)}
+    .contact-card .ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;background:rgba(8,145,178,0.1)}
+    .contact-card:nth-child(3) .ico,.contact-card:nth-child(6) .ico{background:rgba(217,119,6,0.1)}
+    .contact-card .lbl{font-size:0.6rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:1px}
+    .contact-card .val{font-size:0.82rem;color:#fff;font-weight:500}
+    .contact-card a.val:hover{color:var(--accent)}
+    /* Form card */
+    .form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px 20px;animation:fadeUp 0.5s ease-out 0.1s both}
+    .form-card .head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+    .form-card .head .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulseGlow 2s ease-in-out infinite}
+    .form-card .head h3{font-size:1rem;font-weight:700;color:#fff}
+    .form-row{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+    .form-row.half{display:grid;grid-template-columns:1fr;gap:12px}
+    .form-card .fld{position:relative}
+    .form-card .fld input,.form-card .fld select,.form-card .fld textarea{width:100%;padding:14px 14px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#fff;font-size:0.88rem;font-family:inherit;transition:border-color 0.3s,box-shadow 0.3s;outline:none;-webkit-appearance:none}
+    .form-card .fld select option{background:var(--bg-dark);color:#fff}
+    .form-card .fld textarea{min-height:90px;resize:vertical;padding-top:16px}
+    .form-card .fld input:focus,.form-card .fld select:focus,.form-card .fld textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(8,145,178,0.08)}
+    .form-card .fld label{position:absolute;left:14px;top:14px;font-size:0.82rem;color:var(--text-light);pointer-events:none;transition:all 0.2s ease;background:transparent;padding:0 4px}
+    .form-card .fld input:focus+label,.form-card .fld input:not(:placeholder-shown)+label,.form-card .fld textarea:focus+label,.form-card .fld textarea:not(:placeholder-shown)+label,.form-card .fld select:focus+label{top:-1px;font-size:0.6rem;color:var(--accent);background:var(--bg-dark)}
+    .form-card .fld input::placeholder,.form-card .fld textarea::placeholder{color:transparent}
+    .form-card .fld select+label{top:-1px;font-size:0.6rem;color:var(--text-light)}
+    .form-card .fld select:focus+label{color:var(--accent)}
+    .form-card .btn{width:100%;justify-content:center;margin-top:4px}
+    .form-success{display:none;text-align:center;padding:20px}
+    .form-success.show{display:block;animation:fadeUp 0.4s ease-out}
+    .form-success .ico{font-size:2rem;margin-bottom:10px}
+    .form-success h3{font-size:1rem;margin-bottom:4px;color:#fff}
+    .form-success p{color:var(--text-light);font-size:0.85rem}
+    @media(min-width:640px){
+      .form-row.half{grid-template-columns:1fr 1fr}
+    }
+    @media(min-width:900px){
+      .contact-panel{grid-template-columns:1fr 1.6fr;gap:28px}
+      .form-card{padding:28px 26px}
+    }
 
     /* Footer */
     footer{background:var(--bg-dark);border-top:1px solid rgba(255,255,255,0.04);padding:28px 0 20px;color:var(--text-light);font-size:0.78rem}
@@ -909,52 +931,70 @@
       <h2 class="section-title">Launch Your <span class="accent">Project</span></h2>
       <p class="section-sub">Tell us what you need. We'll respond within 24 hours.</p>
     </div>
-    <div class="contact-grid reveal">
-      <div class="contact-info">
-        <a class="contact-item" href="mailto:officialknownation@gmail.com">
-          <div class="icon">&#x1F4E7;</div>
-          <div><h4>Email</h4><span>officialknownation@gmail.com</span></div>
+    <div class="contact-panel">
+      <div class="contact-side">
+        <a class="contact-card" href="mailto:officialknownation@gmail.com">
+          <div class="ico">&#x1F4E7;</div>
+          <div><div class="lbl">Email</div><div class="val">officialknownation@gmail.com</div></div>
         </a>
-        <a class="contact-item" href="tel:+2349031206299">
-          <div class="icon">&#x1F4DE;</div>
-          <div><h4>Phone</h4><span>+234 903 120 6299</span></div>
+        <a class="contact-card" href="tel:+2349031206299">
+          <div class="ico">&#x1F4DE;</div>
+          <div><div class="lbl">Phone</div><div class="val">+234 903 120 6299</div></div>
         </a>
-        <div class="contact-item">
-          <div class="icon">&#x1F4CD;</div>
-          <div><h4>Location</h4><span>Rd 27, Lekki Scheme 2, Ajah, Lagos State</span></div>
+        <div class="contact-card">
+          <div class="ico">&#x1F4CD;</div>
+          <div><div class="lbl">Location</div><div class="val">Lekki Scheme 2, Ajah, Lagos</div></div>
         </div>
-        <a class="contact-item" href="https://x.com/KnowNationHQ" target="_blank">
-          <div class="icon">&#x1F426;</div>
-          <div><h4>X / Twitter</h4><span>@KnowNationHQ</span></div>
+        <a class="contact-card" href="https://x.com/KnowNationHQ" target="_blank">
+          <div class="ico">&#x1F426;</div>
+          <div><div class="lbl">X / Twitter</div><div class="val">@KnowNationHQ</div></div>
         </a>
-        <a class="contact-item" href="https://tiktok.com/@KnowNationHQ" target="_blank">
-          <div class="icon">&#x1F4FA;</div>
-          <div><h4>TikTok</h4><span>@KnowNationHQ</span></div>
+        <a class="contact-card" href="https://tiktok.com/@KnowNationHQ" target="_blank">
+          <div class="ico">&#x1F4FA;</div>
+          <div><div class="lbl">TikTok</div><div class="val">@KnowNationHQ</div></div>
         </a>
       </div>
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvgkzodo" method="POST">
-        <div class="form-row">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-        </div>
-        <div class="form-row">
-          <input type="text" name="company" placeholder="Company (optional)">
-          <select name="budget">
-            <option value="" disabled selected>Budget Range</option>
-            <option value="< 500k">Under &#x20A6;500k</option>
-            <option value="500k - 2M">&#x20A6;500k - &#x20A6;2M</option>
-            <option value="2M+">&#x20A6;2M+</option>
-          </select>
-        </div>
-        <textarea name="message" placeholder="Describe your project..." required></textarea>
-        <input type="hidden" name="_subject" value="New Project Enquiry">
-        <button type="submit" class="btn btn-primary">Submit Brief &rarr;</button>
+      <div class="form-card">
+        <div class="head"><span class="dot"></span><h3>Send Your Brief</h3></div>
+        <form id="contactForm" action="https://formspree.io/f/xvgkzodo" method="POST">
+          <div class="form-row half">
+            <div class="fld">
+              <input type="text" id="fn" name="name" placeholder=" " required>
+              <label for="fn">Full Name</label>
+            </div>
+            <div class="fld">
+              <input type="email" id="em" name="email" placeholder=" " required>
+              <label for="em">Email Address</label>
+            </div>
+          </div>
+          <div class="form-row half">
+            <div class="fld">
+              <input type="text" id="co" name="company" placeholder=" ">
+              <label for="co">Company (optional)</label>
+            </div>
+            <div class="fld">
+              <select id="bg" name="budget" required>
+                <option value="" disabled selected></option>
+                <option value="< 500k">Under &#x20A6;500k</option>
+                <option value="500k - 2M">&#x20A6;500k - &#x20A6;2M</option>
+                <option value="2M+">&#x20A6;2M+</option>
+              </select>
+              <label for="bg">Budget Range</label>
+            </div>
+          </div>
+          <div class="fld">
+            <textarea id="msg" name="message" placeholder=" " required></textarea>
+            <label for="msg">Describe your project...</label>
+          </div>
+          <input type="hidden" name="_subject" value="New Project Enquiry">
+          <button type="submit" class="btn btn-primary">Submit Brief &rarr;</button>
+        </form>
         <div class="form-success" id="formSuccess">
-          <div class="icon">&#x2705;</div>
+          <div class="ico">&#x2705;</div>
           <h3>Brief Received</h3>
           <p>We'll respond within 24 hours with a proposal.</p>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </section>
