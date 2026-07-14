@@ -121,8 +121,23 @@
     .hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
     .hero-actions .btn{padding:12px 20px;font-size:0.85rem}
     .hero-image{position:relative;display:flex;align-items:center;justify-content:center}
-    .hero-image svg{width:280px;height:280px}
-    .hero-image .glow{position:absolute;width:300px;height:300px;border-radius:50%;background:linear-gradient(135deg,var(--accent),transparent,var(--warm));opacity:0.1;z-index:-1;filter:blur(40px)}
+    .hero-image svg{width:280px;height:280px;overflow:visible}
+    .hero-image .glow{position:absolute;width:300px;height:300px;border-radius:50%;background:linear-gradient(135deg,var(--accent),transparent,var(--warm));opacity:0.1;z-index:-1;filter:blur(40px);animation:pulseGlow 3s ease-in-out infinite}
+    @keyframes pulseGlow{0%,100%{opacity:0.08;transform:scale(1)}50%{opacity:0.14;transform:scale(1.05)}}
+    @keyframes spinCw{to{transform:rotate(360deg)}}
+    @keyframes spinCcw{to{transform:rotate(-360deg)}}
+    @keyframes pulseNode{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+    @keyframes floatNode{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    @keyframes dashFlow{to{stroke-dashoffset:-24}}
+    .hero-ring{transform-origin:200px 200px}
+    .hero-ring.s1{animation:spinCw 20s linear infinite}
+    .hero-ring.s2{animation:spinCcw 25s linear infinite}
+    .hero-ring.s3{animation:spinCw 30s linear infinite}
+    .hero-node-pulse{animation:pulseNode 2s ease-in-out infinite}
+    .hero-node-float{animation:floatNode 3s ease-in-out infinite}
+    .hero-node-float:nth-child(2){animation-delay:0.5s}
+    .hero-node-float:nth-child(3){animation-delay:1s}
+    .hero-line{stroke-dasharray:4 4;animation:dashFlow 1s linear infinite}
 
     /* Stats */
     .stats-bar{background:var(--bg-mid);border-top:1px solid rgba(255,255,255,0.04);padding:24px 0}
@@ -378,34 +393,34 @@
           <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D97706"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
           <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
-        <circle cx="200" cy="200" r="180" stroke="url(#g1)" stroke-width="0.5" opacity="0.15"/>
-        <circle cx="200" cy="200" r="130" stroke="url(#g1)" stroke-width="0.5" opacity="0.15"/>
-        <circle cx="200" cy="200" r="80" stroke="url(#g2)" stroke-width="0.5" opacity="0.12"/>
-        <line x1="200" y1="40" x2="310" y2="120" stroke="rgba(8,145,178,0.15)" stroke-width="1"/>
-        <line x1="200" y1="40" x2="90" y2="120" stroke="rgba(8,145,178,0.15)" stroke-width="1"/>
-        <line x1="200" y1="40" x2="200" y2="90" stroke="rgba(8,145,178,0.2)" stroke-width="1"/>
-        <line x1="310" y1="120" x2="340" y2="250" stroke="rgba(8,145,178,0.12)" stroke-width="1"/>
-        <line x1="90" y1="120" x2="60" y2="250" stroke="rgba(8,145,178,0.12)" stroke-width="1"/>
-        <line x1="310" y1="120" x2="200" y2="310" stroke="rgba(217,119,6,0.12)" stroke-width="1"/>
-        <line x1="90" y1="120" x2="200" y2="310" stroke="rgba(217,119,6,0.12)" stroke-width="1"/>
-        <line x1="200" y1="90" x2="310" y2="120" stroke="rgba(8,145,178,0.1)" stroke-width="1"/>
-        <line x1="200" y1="90" x2="90" y2="120" stroke="rgba(8,145,178,0.1)" stroke-width="1"/>
-        <line x1="200" y1="310" x2="340" y2="250" stroke="rgba(217,119,6,0.1)" stroke-width="1"/>
-        <line x1="200" y1="310" x2="60" y2="250" stroke="rgba(217,119,6,0.1)" stroke-width="1"/>
-        <line x1="340" y1="250" x2="60" y2="250" stroke="rgba(217,119,6,0.08)" stroke-width="1"/>
-        <line x1="200" y1="310" x2="200" y2="360" stroke="rgba(217,119,6,0.1)" stroke-width="1"/>
-        <line x1="200" y1="360" x2="260" y2="330" stroke="rgba(217,119,6,0.08)" stroke-width="1"/>
-        <line x1="200" y1="360" x2="140" y2="330" stroke="rgba(217,119,6,0.08)" stroke-width="1"/>
-        <circle cx="200" cy="40" r="12" fill="url(#g1)" filter="url(#glow)"/>
-        <circle cx="310" cy="120" r="8" fill="url(#g1)" filter="url(#glow)"/>
-        <circle cx="90" cy="120" r="8" fill="url(#g1)" filter="url(#glow)"/>
-        <circle cx="200" cy="90" r="5" fill="#0891B2" opacity="0.6"/>
-        <circle cx="340" cy="250" r="6" fill="url(#g2)" filter="url(#glow)"/>
-        <circle cx="60" cy="250" r="6" fill="url(#g2)" filter="url(#glow)"/>
-        <circle cx="200" cy="310" r="10" fill="url(#g2)" filter="url(#glow)"/>
-        <circle cx="200" cy="360" r="7" fill="url(#g2)" filter="url(#glow)"/>
-        <circle cx="260" cy="330" r="4" fill="#D97706" opacity="0.5"/>
-        <circle cx="140" cy="330" r="4" fill="#D97706" opacity="0.5"/>
+        <circle cx="200" cy="200" r="180" stroke="url(#g1)" stroke-width="0.5" opacity="0.15" class="hero-ring s1"/>
+        <circle cx="200" cy="200" r="130" stroke="url(#g1)" stroke-width="0.5" opacity="0.15" class="hero-ring s2"/>
+        <circle cx="200" cy="200" r="80" stroke="url(#g2)" stroke-width="0.5" opacity="0.12" class="hero-ring s3"/>
+        <line x1="200" y1="40" x2="310" y2="120" stroke="rgba(8,145,178,0.15)" stroke-width="1" class="hero-line" style="animation-duration:1.2s"/>
+        <line x1="200" y1="40" x2="90" y2="120" stroke="rgba(8,145,178,0.15)" stroke-width="1" class="hero-line" style="animation-duration:1.5s"/>
+        <line x1="200" y1="40" x2="200" y2="90" stroke="rgba(8,145,178,0.2)" stroke-width="1" class="hero-line" style="animation-duration:0.8s"/>
+        <line x1="310" y1="120" x2="340" y2="250" stroke="rgba(8,145,178,0.12)" stroke-width="1" class="hero-line" style="animation-duration:1.8s"/>
+        <line x1="90" y1="120" x2="60" y2="250" stroke="rgba(8,145,178,0.12)" stroke-width="1" class="hero-line" style="animation-duration:2s"/>
+        <line x1="310" y1="120" x2="200" y2="310" stroke="rgba(217,119,6,0.12)" stroke-width="1" class="hero-line" style="animation-duration:1.4s"/>
+        <line x1="90" y1="120" x2="200" y2="310" stroke="rgba(217,119,6,0.12)" stroke-width="1" class="hero-line" style="animation-duration:1.6s"/>
+        <line x1="200" y1="90" x2="310" y2="120" stroke="rgba(8,145,178,0.1)" stroke-width="1" class="hero-line" style="animation-duration:2.2s"/>
+        <line x1="200" y1="90" x2="90" y2="120" stroke="rgba(8,145,178,0.1)" stroke-width="1" class="hero-line" style="animation-duration:2.5s"/>
+        <line x1="200" y1="310" x2="340" y2="250" stroke="rgba(217,119,6,0.1)" stroke-width="1" class="hero-line" style="animation-duration:1.1s"/>
+        <line x1="200" y1="310" x2="60" y2="250" stroke="rgba(217,119,6,0.1)" stroke-width="1" class="hero-line" style="animation-duration:1.3s"/>
+        <line x1="340" y1="250" x2="60" y2="250" stroke="rgba(217,119,6,0.08)" stroke-width="1" class="hero-line" style="animation-duration:2.8s"/>
+        <line x1="200" y1="310" x2="200" y2="360" stroke="rgba(217,119,6,0.1)" stroke-width="1" class="hero-line" style="animation-duration:0.9s"/>
+        <line x1="200" y1="360" x2="260" y2="330" stroke="rgba(217,119,6,0.08)" stroke-width="1" class="hero-line" style="animation-duration:1.7s"/>
+        <line x1="200" y1="360" x2="140" y2="330" stroke="rgba(217,119,6,0.08)" stroke-width="1" class="hero-line" style="animation-duration:1.9s"/>
+        <circle cx="200" cy="40" r="12" fill="url(#g1)" filter="url(#glow)" class="hero-node-pulse"/>
+        <circle cx="310" cy="120" r="8" fill="url(#g1)" filter="url(#glow)" class="hero-node-pulse" style="animation-delay:0.3s"/>
+        <circle cx="90" cy="120" r="8" fill="url(#g1)" filter="url(#glow)" class="hero-node-pulse" style="animation-delay:0.6s"/>
+        <circle cx="200" cy="90" r="5" fill="#0891B2" opacity="0.6" class="hero-node-pulse" style="animation-delay:0.9s"/>
+        <circle cx="340" cy="250" r="6" fill="url(#g2)" filter="url(#glow)" class="hero-node-float"/>
+        <circle cx="60" cy="250" r="6" fill="url(#g2)" filter="url(#glow)" class="hero-node-float" style="animation-delay:0.4s"/>
+        <circle cx="200" cy="310" r="10" fill="url(#g2)" filter="url(#glow)" class="hero-node-float" style="animation-delay:0.8s"/>
+        <circle cx="200" cy="360" r="7" fill="url(#g2)" filter="url(#glow)" class="hero-node-float" style="animation-delay:1.2s"/>
+        <circle cx="260" cy="330" r="4" fill="#D97706" opacity="0.5" class="hero-node-float" style="animation-delay:0.2s"/>
+        <circle cx="140" cy="330" r="4" fill="#D97706" opacity="0.5" class="hero-node-float" style="animation-delay:0.6s"/>
         <circle cx="200" cy="200" r="3" fill="#0891B2" opacity="0.4"/>
         <circle cx="270" cy="170" r="2" fill="#0891B2" opacity="0.3"/>
         <circle cx="130" cy="170" r="2" fill="#0891B2" opacity="0.3"/>
