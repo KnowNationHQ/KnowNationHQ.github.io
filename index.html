@@ -54,10 +54,10 @@
       --radius:12px;--radius-lg:20px;--max-w:1100px;
       --transition:0.25s cubic-bezier(0.4,0,0.2,1)
     }
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-y:scroll;overflow-x:hidden}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;
-      background:var(--bg-light);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden
+      background:var(--bg-light);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh
 
     }
     .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
@@ -152,7 +152,7 @@
     .stat .label{font-size:0.65rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;opacity:0.7}
     @keyframes countPop{0%{transform:scale(0.8);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
     .stat .num.counted{animation:countPop 0.3s ease-out}
-    .tech-scroll{overflow:hidden;background:var(--bg);padding:0;position:relative}
+    .tech-scroll{overflow:hidden;background:var(--bg);padding:0;position:relative;width:100%}
     /* Grid + scan */
     .tech-scroll::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
       background-image:radial-gradient(circle,rgba(8,145,178,0.06) 1px,transparent 1px);
@@ -171,7 +171,7 @@
     .tech-row.top{animation:scrollL 50s linear infinite}
     .tech-row.bot{animation:scrollR 45s linear infinite}
     @keyframes scrollL{to{transform:translateX(-50%)}}
-    @keyframes scrollR{0%{transform:translateX(-50%)}to{transform:translateX(0)}}
+    @keyframes scrollR{to{transform:translateX(-50%)}}
     .tech-row .tag{display:flex;align-items:center;gap:7px;padding:4px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:5px;font-size:12px;white-space:nowrap;color:var(--fg-muted);flex-shrink:0;transition:var(--transition);position:relative;background:rgba(8,145,178,0.02)}
     .tech-row .tag::after{content:'';position:absolute;inset:-1px;border-radius:5px;background:linear-gradient(135deg,var(--accent),transparent,var(--warm));opacity:0;transition:opacity 0.3s;z-index:-1}
     .tech-row .tag:hover{color:#fff;border-color:transparent;transform:translateY(-2px);background:rgba(8,145,178,0.06)}
