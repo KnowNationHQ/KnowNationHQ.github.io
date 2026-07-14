@@ -267,15 +267,34 @@
     .pricing-card .btn{width:100%;justify-content:center}
 
     /* Trust */
-    #trust{background:var(--bg-dark);color:#fff}
+    #trust{background:var(--bg-dark);color:#fff;position:relative;overflow:hidden}
+    #trust::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,0.04),transparent 70%);top:-20%;right:-10%;pointer-events:none}
     #trust .section-sub{color:var(--text-light)}
-    .trust-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;-webkit-overflow-scrolling:touch}
-    .trust-grid::-webkit-scrollbar{height:4px}
-    .trust-grid::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
-    .trust-badge{scroll-snap-align:start;flex-shrink:0;width:200px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:20px;text-align:center}
-    .trust-badge .icon{font-size:1.6rem;margin-bottom:8px}
-    .trust-badge h4{font-size:0.82rem;font-weight:600;margin-bottom:4px}
-    .trust-badge p{font-size:0.75rem;color:var(--text-light)}
+    .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:1}
+    @keyframes trustPop{from{opacity:0;transform:scale(0.85) rotate(-2deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+    .trust-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px 18px;transition:var(--transition);position:relative;overflow:hidden;animation:trustPop 0.5s ease-out both}
+    .trust-card:nth-child(1){animation-delay:0.05s}
+    .trust-card:nth-child(2){animation-delay:0.15s}
+    .trust-card:nth-child(3){animation-delay:0.25s}
+    .trust-card:nth-child(4){animation-delay:0.35s}
+    .trust-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(8,145,178,0.2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+    .trust-card .bar{position:absolute;top:0;left:0;right:0;height:3px}
+    .trust-card:nth-child(1) .bar{background:linear-gradient(90deg,var(--accent),#06B6D4)}
+    .trust-card:nth-child(2) .bar{background:linear-gradient(90deg,var(--warm),#F59E0B)}
+    .trust-card:nth-child(3) .bar{background:linear-gradient(90deg,var(--accent),#06B6D4)}
+    .trust-card:nth-child(4) .bar{background:linear-gradient(90deg,var(--warm),#F59E0B)}
+    .trust-card .ico-wrap{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;position:relative}
+    .trust-card:nth-child(1) .ico-wrap{background:rgba(8,145,178,0.12)}
+    .trust-card:nth-child(2) .ico-wrap{background:rgba(217,119,6,0.12)}
+    .trust-card:nth-child(3) .ico-wrap{background:rgba(8,145,178,0.12)}
+    .trust-card:nth-child(4) .ico-wrap{background:rgba(217,119,6,0.12)}
+    .trust-card h4{font-size:0.85rem;font-weight:700;margin-bottom:6px;color:#fff}
+    .trust-card p{font-size:0.76rem;color:var(--text-light);line-height:1.5;margin:0}
+    .trust-card .seal{position:absolute;bottom:12px;right:14px;font-size:1.8rem;opacity:0.04;pointer-events:none;line-height:1}
+    @media(min-width:640px){
+      .trust-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+      .trust-card{padding:28px 20px}
+    }
 
     /* FAQ */
     #faq{background:var(--bg-light)}
@@ -778,26 +797,34 @@
       <h2 class="section-title">Trust &amp; <span class="accent">Compliance</span></h2>
       <p class="section-sub">Certified. Registered. Local by design.</p>
     </div>
-    <div class="trust-grid reveal">
-      <div class="trust-badge">
-        <div class="icon">&#x1F4CB;</div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="bar"></div>
+        <div class="ico-wrap">&#x1F4CB;</div>
         <h4>CAC Registered</h4>
-        <p>RC 8031547. Incorporated October 2024. Fully compliant.</p>
+        <p>RC 8031547. Incorporated October 2024. Fully compliant with Nigerian corporate law.</p>
+        <div class="seal">&#x1F4CB;</div>
       </div>
-      <div class="trust-badge">
-        <div class="icon">&#x1F310;</div>
+      <div class="trust-card">
+        <div class="bar"></div>
+        <div class="ico-wrap">&#x1F310;</div>
         <h4>Data Sovereignty</h4>
-        <p>Your data stays in Nigeria. No foreign cloud routing.</p>
+        <p>Your data stays in Nigeria. No foreign cloud routing. Hosted on local infrastructure.</p>
+        <div class="seal">&#x1F310;</div>
       </div>
-      <div class="trust-badge">
-        <div class="icon">&#x1F4B3;</div>
+      <div class="trust-card">
+        <div class="bar"></div>
+        <div class="ico-wrap">&#x1F4B3;</div>
         <h4>Payment Certified</h4>
-        <p>Monnify, Squad, Paystack authorised integration partners.</p>
+        <p>Monnify, Squad, Paystack — authorised integration partners with live production deployments.</p>
+        <div class="seal">&#x1F4B3;</div>
       </div>
-      <div class="trust-badge">
-        <div class="icon">&#x1F512;</div>
+      <div class="trust-card">
+        <div class="bar"></div>
+        <div class="ico-wrap">&#x1F512;</div>
         <h4>IP Ownership</h4>
-        <p>You own 100% of the code. No licensing traps.</p>
+        <p>You own 100% of the code. No licensing traps, no recurring royalties. Full transfer on delivery.</p>
+        <div class="seal">&#x1F512;</div>
       </div>
     </div>
   </div>
