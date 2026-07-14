@@ -153,21 +153,44 @@
     @keyframes countPop{0%{transform:scale(0.8);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
     .stat .num.counted{animation:countPop 0.3s ease-out}
     .tech-scroll{overflow:hidden;background:var(--bg);padding:0;border-bottom:1px solid rgba(255,255,255,0.04);position:relative}
-    .tech-scroll::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(8,145,178,0.015) 2px,rgba(8,145,178,0.015) 4px);pointer-events:none;z-index:2}
-    .tech-scroll::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 8%,transparent 92%,var(--bg) 100%);pointer-events:none;z-index:2}
-    @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-    .tech-scroll .glide{position:absolute;inset:0;width:60%;background:linear-gradient(90deg,transparent,rgba(8,145,178,0.03),transparent);transform:translateX(-100%);animation:shimmer 4s ease-in-out infinite;pointer-events:none;z-index:1}
-    .tech-row{display:flex;gap:28px;width:max-content;padding:10px 0}
+    /* Grid overlay */
+    .tech-scroll::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+      background-image:radial-gradient(circle,rgba(8,145,178,0.08) 1px,transparent 1px);
+      background-size:24px 24px;
+      animation:gridPulse 4s ease-in-out infinite}
+    @keyframes gridPulse{0%,100%{opacity:0.3}50%{opacity:0.6}}
+    /* Scan line */
+    .tech-scroll .scan{position:absolute;inset:0;z-index:3;pointer-events:none;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(8,145,178,0.02) 2px,rgba(8,145,178,0.02) 4px)}
+    /* Radar sweep */
+    .tech-scroll .sweep{position:absolute;inset:0;z-index:3;pointer-events:none;
+      background:linear-gradient(90deg,transparent 0%,rgba(8,145,178,0.04) 50%,transparent 100%);
+      width:30%;animation:sweepBeam 3s ease-in-out infinite;filter:blur(20px)}
+    @keyframes sweepBeam{0%{left:-30%}50%{left:100%}100%{left:100%}}
+    /* Data burst */
+    @keyframes dataBurst{0%{box-shadow:inset 0 0 0 0 rgba(8,145,178,0)}50%{box-shadow:inset 0 0 20px 2px rgba(8,145,178,0.04)}100%{box-shadow:inset 0 0 0 0 rgba(8,145,178,0)}}
+    .tech-scroll .burst{position:absolute;inset:0;z-index:1;pointer-events:none;animation:dataBurst 3s ease-in-out infinite}
+    /* Rows */
+    .tech-row{display:flex;gap:28px;width:max-content;padding:10px 0;position:relative;z-index:1}
     .tech-row.top{animation:scrollL 50s linear infinite}
     .tech-row.bot{animation:scrollR 45s linear infinite}
     @keyframes scrollL{to{transform:translateX(-50%)}}
     @keyframes scrollR{0%{transform:translateX(-50%)}to{transform:translateX(0)}}
-    .tech-row .tag{display:flex;align-items:center;gap:7px;padding:4px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:5px;font-size:12px;white-space:nowrap;color:var(--fg-muted);flex-shrink:0;transition:var(--transition);position:relative}
+    /* Tags cyber */
+    .tech-row .tag{display:flex;align-items:center;gap:7px;padding:4px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:5px;font-size:12px;white-space:nowrap;color:var(--fg-muted);flex-shrink:0;transition:var(--transition);position:relative;background:rgba(8,145,178,0.02)}
     .tech-row .tag::after{content:'';position:absolute;inset:-1px;border-radius:5px;background:linear-gradient(135deg,var(--accent),transparent,var(--warm));opacity:0;transition:opacity 0.3s;z-index:-1}
-    .tech-row .tag:hover{color:#fff;border-color:transparent;transform:translateY(-2px)}
-    .tech-row .tag:hover::after{opacity:0.5}
-    @keyframes pulseTag{0%,100%{box-shadow:0 0 4px rgba(8,145,178,0)}50%{box-shadow:0 0 12px rgba(8,145,178,0.08)}}
-    .tech-row .tag .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:pulseTag 2s ease-in-out infinite}
+    .tech-row .tag:hover{color:#fff;border-color:transparent;transform:translateY(-2px);background:rgba(8,145,178,0.06)}
+    .tech-row .tag:hover::after{opacity:0.6}
+    /* Dot pulse */
+    @keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(8,145,178,0)}50%{box-shadow:0 0 0 4px rgba(8,145,178,0.08)}}
+    .tech-row .tag .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:dotPulse 1.5s ease-in-out infinite}
+    /* Glitch flicker on tags */
+    @keyframes glitch{0%,90%,100%{transform:translate(0)}92%{transform:translate(-2px,1px)}94%{transform:translate(2px,-1px)}96%{transform:translate(-1px,-1px)}98%{transform:translate(1px,1px)}}
+    .tech-row .tag:nth-child(odd){animation:glitch 5s ease-in-out infinite}
+    .tech-row .tag:nth-child(even){animation:glitch 7s ease-in-out infinite 1s}
+    /* Edge vignette */
+    .tech-scroll .vignette{position:absolute;inset:0;z-index:4;pointer-events:none;
+      background:linear-gradient(90deg,var(--bg) 0%,transparent 6%,transparent 94%,var(--bg) 100%)}
 
     /* Process */
     #process{overflow:hidden}
@@ -569,7 +592,10 @@
 
 <!--- TECH SCROLLING BANNER --->
 <div class="tech-scroll">
-  <div class="glide"></div>
+  <div class="scan"></div>
+  <div class="sweep"></div>
+  <div class="burst"></div>
+  <div class="vignette"></div>
   <div class="tech-row top">
     <span class="tag"><span class="dot" style="background:#E34F26"></span>HTML5</span>
     <span class="tag"><span class="dot" style="background:#1572B6"></span>CSS3</span>
