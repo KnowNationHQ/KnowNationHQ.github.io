@@ -172,6 +172,29 @@
     .service-card .tech{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
     .service-card .tech span{font-size:0.68rem;padding:3px 8px;border-radius:4px;background:var(--accent-glow);color:var(--accent);font-weight:500}
 
+    /* Portfolio */
+    .project-grid{display:flex;flex-direction:column;gap:20px}
+    .project-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition)}
+    .project-card:hover{box-shadow:0 12px 40px rgba(8,145,178,0.08);transform:translateY(-2px)}
+    .project-card img{width:100%;height:200px;object-fit:cover;display:block}
+    .project-card .body{padding:20px}
+    .project-card .tag{display:inline-block;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:4px 10px;border-radius:6px;margin-bottom:10px}
+    .project-card .tag.client{background:rgba(8,145,178,0.08);color:var(--accent)}
+    .project-card .tag.internal{background:rgba(217,119,6,0.1);color:var(--warm)}
+    .project-card h3{font-size:1rem;font-weight:700;margin-bottom:4px}
+    .project-card .meta{font-size:0.82rem;color:var(--text-muted);margin-bottom:10px;line-height:1.5}
+    .project-card .links{display:flex;gap:14px;flex-wrap:wrap}
+    .project-card .links a{font-size:0.82rem;font-weight:600}
+    @media(min-width:640px){
+      .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+      .project-card img{height:220px}
+    }
+    @media(min-width:900px){
+      .project-grid{grid-template-columns:repeat(3,1fr);gap:24px}
+      .project-card img{height:240px}
+      .project-card .body{padding:24px}
+    }
+
     /* Pricing */
     #pricing{background:#fff}
     .pricing-grid{display:flex;flex-direction:column;gap:16px}
@@ -463,6 +486,51 @@
         <h3>PWAs &amp; Telegram Mini Apps</h3>
         <p>Offline-first progressive web apps and Telegram Mini Apps with integrated payments, user management, and real-time features.</p>
         <div class="tech"><span>PWA</span><span>Telegram API</span><span>Supabase</span><span>Realtime</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--- PORTFOLIO --->
+<section class="section" id="portfolio">
+  <div class="container">
+    <div class="section-inner">
+      <h2 class="section-title">Live <span class="accent">Projects</span></h2>
+      <p class="section-sub">Production software deployed for real Nigerian businesses.</p>
+    </div>
+    <div class="project-grid reveal">
+      <div class="project-card">
+        <img src="sunteck-thumb.jpg" alt="Sunteck Global Impact Ltd" loading="lazy">
+        <div class="body">
+          <span class="tag client">Client</span>
+          <h3>Sunteck Global Impact Ltd</h3>
+          <div class="meta">Solar energy company — corporate website with service showcase, contact, and brand story.</div>
+          <div class="links">
+            <a href="https://www.suntecksolars.com" target="_blank">Visit Site &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="vietnam-burger-thumb.jpg" alt="Vietnam Burger Unisex Salon" loading="lazy">
+        <div class="body">
+          <span class="tag client">Client</span>
+          <h3>Vietnam Burger Unisex Salon</h3>
+          <div class="meta">Premium salon — full brand site with service catalogue, gallery, and WhatsApp booking integration.</div>
+          <div class="links">
+            <a href="https://vietnam-burger-salon.vercel.app" target="_blank">Visit Site &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="knownation-thumb.jpg" alt="KnowNation HQ" loading="lazy">
+        <div class="body">
+          <span class="tag internal">In-House</span>
+          <h3>KnowNation HQ</h3>
+          <div class="meta">Our own site — agentic positioning, live pricing, mobile-first 2026 design. Dogfooding our own pipeline.</div>
+          <div class="links">
+            <a href="https://knownationhq.github.io" target="_blank">Visit Site &rarr;</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
