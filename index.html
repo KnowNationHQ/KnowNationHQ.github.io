@@ -155,13 +155,21 @@
     .stat .label{font-size:0.7rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px}
 
     /* Process */
-    .process-grid{display:flex;flex-direction:column;gap:16px;align-items:center}
-    .process-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;width:100%;transition:var(--transition)}
-    .process-card:hover{box-shadow:0 8px 32px rgba(8,145,178,0.06);border-color:rgba(8,145,178,0.2)}
-    .process-card .step{font-size:0.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
-    .process-card h3{font-size:1rem;font-weight:700;margin-bottom:6px}
-    .process-card p{font-size:0.85rem;color:var(--text-muted);line-height:1.6}
-    .process-arrow{display:none;font-size:1.5rem;color:var(--accent);font-weight:300;flex-shrink:0}
+    #process{overflow:hidden}
+    .process-grid{display:flex;flex-direction:column;gap:0;align-items:stretch;position:relative}
+    .process-grid::before{content:'';position:absolute;top:0;left:24px;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--warm));opacity:0.15}
+    @keyframes stepIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .process-card{background:rgba(255,255,255,0.4);backdrop-filter:blur(4px);border:1px solid var(--border);border-radius:var(--radius);padding:20px 20px 20px 48px;transition:var(--transition);position:relative;animation:stepIn 0.6s ease-out both;margin-bottom:12px}
+    .process-card:nth-child(3){animation-delay:0.2s}
+    .process-card:nth-child(5){animation-delay:0.4s}
+    .process-card:hover{background:#fff;border-color:rgba(8,145,178,0.2);box-shadow:0 8px 32px rgba(8,145,178,0.06);transform:translateX(4px)}
+    .process-card::before{content:'';position:absolute;left:-8px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+    .process-card:last-child::before{background:var(--warm);box-shadow:0 0 0 2px var(--warm)}
+    .process-card .step{font-size:0.65rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+    .process-card .step span{color:var(--text-muted);font-weight:400;text-transform:none;letter-spacing:0}
+    .process-card h3{font-size:1rem;font-weight:700;margin-bottom:4px}
+    .process-card p{font-size:0.83rem;color:var(--text-muted);line-height:1.6;margin:0}
+    .process-connector{display:none}
 
     /* Pillars */
     #pillars{background:#fff}
@@ -183,17 +191,23 @@
     .guarantee-item p{font-size:0.82rem;color:var(--text-light);line-height:1.5}
 
     /* Services */
+    @keyframes cardIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
     .services-list{display:flex;flex-direction:column;gap:16px}
-    .service-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;transition:var(--transition);position:relative;overflow:hidden}
-    .service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,145,178,0.02),transparent 60%);opacity:0;transition:opacity 0.4s ease;pointer-events:none}
-    .service-card:hover{box-shadow:0 12px 40px rgba(8,145,178,0.06);border-color:rgba(8,145,178,0.2);transform:translateY(-2px)}
-    .service-card:hover::before{opacity:1}
-    .service-card .num{font-size:0.65rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;opacity:0.6}
-    .service-card .icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:12px;background:var(--accent-glow)}
+    .service-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;transition:var(--transition);position:relative;overflow:hidden;animation:cardIn 0.5s ease-out both}
+    .service-card:nth-child(1){animation-delay:0.05s}
+    .service-card:nth-child(2){animation-delay:0.15s}
+    .service-card:nth-child(3){animation-delay:0.25s}
+    .service-card:nth-child(4){animation-delay:0.35s}
+    .service-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--warm));opacity:0;transition:opacity 0.4s ease}
+    .service-card:hover{box-shadow:0 12px 40px rgba(8,145,178,0.06);border-color:rgba(8,145,178,0.15);transform:translateY(-3px)}
+    .service-card:hover::after{opacity:1}
+    .service-card .num{position:absolute;top:16px;right:16px;font-size:0.7rem;font-weight:700;color:var(--accent);background:var(--accent-glow);padding:2px 8px;border-radius:4px}
+    .service-card .icon-wrap{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:10px;background:linear-gradient(135deg,var(--accent-glow),rgba(8,145,178,0.04))}
     .service-card h3{font-size:0.95rem;font-weight:700;margin-bottom:6px}
     .service-card p{font-size:0.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:12px}
     .service-card .tech{display:flex;gap:6px;flex-wrap:wrap}
-    .service-card .tech span{font-size:0.65rem;padding:3px 9px;border-radius:6px;background:var(--accent-glow);color:var(--accent);font-weight:500}
+    .service-card .tech span{font-size:0.62rem;padding:3px 8px;border-radius:5px;background:var(--accent-glow);color:var(--accent);font-weight:500;transition:var(--transition)}
+    .service-card:hover .tech span{background:rgba(8,145,178,0.12)}
     .service-card .price-anchor{display:inline-block;font-size:0.72rem;font-weight:600;color:var(--text-muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--border);width:100%}
     .service-card .price-anchor strong{color:var(--accent)}
     @media(min-width:640px){
@@ -202,8 +216,8 @@
     }
     @media(min-width:900px){
       .services-list{grid-template-columns:repeat(4,1fr);gap:20px}
-      .service-card{padding:32px 24px}
-      .service-card .icon-wrap{width:44px;height:44px;font-size:1.3rem}
+      .service-card{padding:30px 24px}
+      .service-card .icon-wrap{width:42px;height:42px;font-size:1.2rem}
     }
 
     /* Portfolio */
@@ -345,9 +359,20 @@
       .stat .num{font-size:1.6rem}
       nav .links{gap:24px}
       nav .links a{font-size:0.85rem}
-      .process-card{padding:28px 24px}
-      .process-card .step{font-size:0.72rem}
-      .process-card h3{font-size:1.05rem}
+      .process-grid{flex-direction:row;gap:0;align-items:flex-start;padding-top:20px}
+      .process-grid::before{display:none}
+      .process-card{padding:24px;margin-bottom:0;flex:1;text-align:center;animation:stepIn 0.6s ease-out both}
+      .process-card:nth-child(3){animation-delay:0.15s}
+      .process-card:nth-child(5){animation-delay:0.3s}
+      .process-card::before{left:50%;top:-14px;transform:translateX(-50%)}
+      .process-card:last-child::before{left:50%}
+      .process-card .step{justify-content:center}
+      .process-card:hover{transform:translateY(-4px)}
+      .process-connector{display:flex;align-items:center;justify-content:center;flex:0 0 40px;padding-top:40px;position:relative}
+      .process-connector::after{content:'';height:2px;width:100%;background:linear-gradient(90deg,var(--accent),transparent);opacity:0.2}
+      .process-connector:last-child{display:none}
+      @keyframes pulseLine{0%,100%{opacity:0.2}50%{opacity:0.5}}
+      .process-connector:nth-child(6)::after{animation:pulseLine 2s ease-in-out infinite;background:linear-gradient(90deg,transparent,var(--warm))}
       .pillar-card{padding:28px 24px}
       .pillar-card .icon{font-size:2rem}
       .service-card{padding:28px 24px}
@@ -498,19 +523,19 @@
     </div>
     <div class="process-grid reveal">
       <div class="process-card">
-        <div class="step">01 &mdash; Intake</div>
+        <div class="step">01 <span>Intake</span></div>
         <h3>Decompose</h3>
         <p>You describe your requirements. Our pipeline splits them into executable tasks — frontend, payments, content, infra.</p>
       </div>
-      <div class="process-arrow">&rarr;</div>
+      <div class="process-connector"></div>
       <div class="process-card">
-        <div class="step">02 &mdash; Build</div>
+        <div class="step">02 <span>Build</span></div>
         <h3>Generate &amp; Integrate</h3>
-        <p>Multi-agent AI workers write code, connect Monnify/Squad/Paystack, generate UI, and produce video assets. Every output is logged.</p>
+        <p>Multi-agent AI workers write code, connect Monnify/Squad/Paystack, generate UI, and produce video assets.</p>
       </div>
-      <div class="process-arrow">&rarr;</div>
+      <div class="process-connector"></div>
       <div class="process-card">
-        <div class="step">03 &mdash; Ship</div>
+        <div class="step">03 <span>Ship</span></div>
         <h3>Review &amp; Deploy</h3>
         <p>You review each deliverable. Agents revise. When you approve, we deploy to production with a full audit trail.</p>
       </div>
