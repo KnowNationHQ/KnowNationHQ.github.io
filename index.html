@@ -152,12 +152,22 @@
     .stat .label{font-size:0.65rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;opacity:0.7}
     @keyframes countPop{0%{transform:scale(0.8);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
     .stat .num.counted{animation:countPop 0.3s ease-out}
-    .tech-scroll{overflow:hidden;background:var(--bg);padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-    .tech-track{display:flex;gap:28px;width:max-content;animation:scrollTech 40s linear infinite}
-    .tech-track .tag{display:flex;align-items:center;gap:7px;padding:5px 14px;border:1px solid rgba(255,255,255,0.08);border-radius:5px;font-size:12px;white-space:nowrap;color:var(--fg-muted);flex-shrink:0;transition:border-color 0.3s,color 0.3s}
-    .tech-track .tag:hover{border-color:var(--accent);color:var(--fg)}
-    .tech-track .tag .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-    @keyframes scrollTech{to{transform:translateX(-50%)}}
+    .tech-scroll{overflow:hidden;background:var(--bg);padding:0;border-bottom:1px solid rgba(255,255,255,0.04);position:relative}
+    .tech-scroll::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(8,145,178,0.015) 2px,rgba(8,145,178,0.015) 4px);pointer-events:none;z-index:2}
+    .tech-scroll::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 8%,transparent 92%,var(--bg) 100%);pointer-events:none;z-index:2}
+    @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+    .tech-scroll .glide{position:absolute;inset:0;width:60%;background:linear-gradient(90deg,transparent,rgba(8,145,178,0.03),transparent);transform:translateX(-100%);animation:shimmer 4s ease-in-out infinite;pointer-events:none;z-index:1}
+    .tech-row{display:flex;gap:28px;width:max-content;padding:10px 0}
+    .tech-row.top{animation:scrollL 50s linear infinite}
+    .tech-row.bot{animation:scrollR 45s linear infinite}
+    @keyframes scrollL{to{transform:translateX(-50%)}}
+    @keyframes scrollR{0%{transform:translateX(-50%)}to{transform:translateX(0)}}
+    .tech-row .tag{display:flex;align-items:center;gap:7px;padding:4px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:5px;font-size:12px;white-space:nowrap;color:var(--fg-muted);flex-shrink:0;transition:var(--transition);position:relative}
+    .tech-row .tag::after{content:'';position:absolute;inset:-1px;border-radius:5px;background:linear-gradient(135deg,var(--accent),transparent,var(--warm));opacity:0;transition:opacity 0.3s;z-index:-1}
+    .tech-row .tag:hover{color:#fff;border-color:transparent;transform:translateY(-2px)}
+    .tech-row .tag:hover::after{opacity:0.5}
+    @keyframes pulseTag{0%,100%{box-shadow:0 0 4px rgba(8,145,178,0)}50%{box-shadow:0 0 12px rgba(8,145,178,0.08)}}
+    .tech-row .tag .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:pulseTag 2s ease-in-out infinite}
 
     /* Process */
     #process{overflow:hidden}
@@ -559,7 +569,46 @@
 
 <!--- TECH SCROLLING BANNER --->
 <div class="tech-scroll">
-  <div class="tech-track">
+  <div class="glide"></div>
+  <div class="tech-row top">
+    <span class="tag"><span class="dot" style="background:#E34F26"></span>HTML5</span>
+    <span class="tag"><span class="dot" style="background:#1572B6"></span>CSS3</span>
+    <span class="tag"><span class="dot" style="background:#F7DF1E"></span>JavaScript</span>
+    <span class="tag"><span class="dot" style="background:#3178C6"></span>TypeScript</span>
+    <span class="tag"><span class="dot" style="background:#61DAFB"></span>React</span>
+    <span class="tag"><span class="dot" style="background:#000"></span>Next.js</span>
+    <span class="tag"><span class="dot" style="background:#3776AB"></span>Python</span>
+    <span class="tag"><span class="dot" style="background:#339933"></span>Node.js</span>
+    <span class="tag"><span class="dot" style="background:#F05032"></span>Git</span>
+    <span class="tag"><span class="dot" style="background:#2496ED"></span>Docker</span>
+    <span class="tag"><span class="dot" style="background:#4169E1"></span>PostgreSQL</span>
+    <span class="tag"><span class="dot" style="background:#06B6D4"></span>Tailwind</span>
+    <span class="tag"><span class="dot" style="background:#F24E1E"></span>Figma</span>
+    <span class="tag"><span class="dot" style="background:#3ECF8E"></span>Supabase</span>
+    <span class="tag"><span class="dot" style="background:#FF4154"></span>React Native</span>
+    <span class="tag"><span class="dot" style="background:#E0234E"></span>Nginx</span>
+    <span class="tag"><span class="dot" style="background:#FFF"></span>REST API</span>
+    <span class="tag"><span class="dot" style="background:#5849BE"></span>GraphQL</span>
+    <span class="tag"><span class="dot" style="background:#E34F26"></span>HTML5</span>
+    <span class="tag"><span class="dot" style="background:#1572B6"></span>CSS3</span>
+    <span class="tag"><span class="dot" style="background:#F7DF1E"></span>JavaScript</span>
+    <span class="tag"><span class="dot" style="background:#3178C6"></span>TypeScript</span>
+    <span class="tag"><span class="dot" style="background:#61DAFB"></span>React</span>
+    <span class="tag"><span class="dot" style="background:#000"></span>Next.js</span>
+    <span class="tag"><span class="dot" style="background:#3776AB"></span>Python</span>
+    <span class="tag"><span class="dot" style="background:#339933"></span>Node.js</span>
+    <span class="tag"><span class="dot" style="background:#F05032"></span>Git</span>
+    <span class="tag"><span class="dot" style="background:#2496ED"></span>Docker</span>
+    <span class="tag"><span class="dot" style="background:#4169E1"></span>PostgreSQL</span>
+    <span class="tag"><span class="dot" style="background:#06B6D4"></span>Tailwind</span>
+    <span class="tag"><span class="dot" style="background:#F24E1E"></span>Figma</span>
+    <span class="tag"><span class="dot" style="background:#3ECF8E"></span>Supabase</span>
+    <span class="tag"><span class="dot" style="background:#FF4154"></span>React Native</span>
+    <span class="tag"><span class="dot" style="background:#E0234E"></span>Nginx</span>
+    <span class="tag"><span class="dot" style="background:#FFF"></span>REST API</span>
+    <span class="tag"><span class="dot" style="background:#5849BE"></span>GraphQL</span>
+  </div>
+  <div class="tech-row bot">
     <span class="tag"><span class="dot" style="background:#E34F26"></span>HTML5</span>
     <span class="tag"><span class="dot" style="background:#1572B6"></span>CSS3</span>
     <span class="tag"><span class="dot" style="background:#F7DF1E"></span>JavaScript</span>
