@@ -187,13 +187,38 @@
 
     /* Guarantee */
     #guarantee{background:var(--bg-dark);color:#fff;position:relative;overflow:hidden}
-    #guarantee::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:var(--accent);filter:blur(160px);opacity:0.05;bottom:-30%;left:-20%;pointer-events:none}
+    #guarantee::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,0.05),transparent 70%);bottom:-30%;left:-10%;pointer-events:none}
+    #guarantee::after{content:'';position:absolute;top:-10%;right:-5%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(217,119,6,0.03),transparent 70%);pointer-events:none}
     #guarantee .section-sub{color:var(--text-light)}
-    .guarantee-grid{display:flex;flex-direction:column;gap:16px;position:relative;z-index:1}
-    .guarantee-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:18px}
-    .guarantee-item .mark{font-size:1.1rem;color:var(--accent);flex-shrink:0;margin-top:2px}
-    .guarantee-item h4{font-size:0.88rem;font-weight:600;margin-bottom:4px;color:#fff}
-    .guarantee-item p{font-size:0.82rem;color:var(--text-light);line-height:1.5}
+    @keyframes slideGuard{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+    .guarantee-grid{display:grid;grid-template-columns:1fr;gap:12px;position:relative;z-index:1}
+    .guard-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:18px 18px 18px 20px;transition:var(--transition);position:relative;overflow:hidden;display:flex;align-items:flex-start;gap:14px;animation:slideGuard 0.5s ease-out both}
+    .guard-card:nth-child(1){animation-delay:0.05s}
+    .guard-card:nth-child(2){animation-delay:0.15s}
+    .guard-card:nth-child(3){animation-delay:0.25s}
+    .guard-card:nth-child(4){animation-delay:0.35s}
+    .guard-card:hover{border-color:rgba(8,145,178,0.2);background:rgba(255,255,255,0.04);transform:translateX(4px)}
+    .guard-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+    .guard-card:nth-child(1)::before{background:linear-gradient(180deg,var(--accent),#06B6D4)}
+    .guard-card:nth-child(2)::before{background:linear-gradient(180deg,var(--warm),#F59E0B)}
+    .guard-card:nth-child(3)::before{background:linear-gradient(180deg,var(--accent),#06B6D4)}
+    .guard-card:nth-child(4)::before{background:linear-gradient(180deg,var(--warm),#F59E0B)}
+    .guard-card .shield{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;margin-top:1px}
+    .guard-card:nth-child(1) .shield{background:rgba(8,145,178,0.12)}
+    .guard-card:nth-child(2) .shield{background:rgba(217,119,6,0.12)}
+    .guard-card:nth-child(3) .shield{background:rgba(8,145,178,0.12)}
+    .guard-card:nth-child(4) .shield{background:rgba(217,119,6,0.12)}
+    .guard-card .body{flex:1}
+    .guard-card h4{font-size:0.85rem;font-weight:700;margin-bottom:4px;color:#fff}
+    .guard-card p{font-size:0.78rem;color:var(--text-light);line-height:1.5;margin:0}
+    .guard-card .badge{display:inline-block;font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:4px;margin-bottom:6px;color:var(--accent);border:1px solid rgba(8,145,178,0.15)}
+    .guard-card:nth-child(2) .badge{border-color:rgba(217,119,6,0.15);color:var(--warm)}
+    .guard-card:nth-child(3) .badge{border-color:rgba(8,145,178,0.15);color:var(--accent)}
+    .guard-card:nth-child(4) .badge{border-color:rgba(217,119,6,0.15);color:var(--warm)}
+    @media(min-width:640px){
+      .guarantee-grid{grid-template-columns:1fr 1fr;gap:14px}
+      .guard-card{padding:22px 20px 22px 24px}
+    }
 
     /* Services */
     @keyframes cardIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -615,22 +640,38 @@
       <h2 class="section-title">The <span class="accent">Guardrail</span></h2>
       <p class="section-sub">How we prevent autonomous agents from going off-track.</p>
     </div>
-    <div class="guarantee-grid reveal">
-      <div class="guarantee-item">
-        <div class="mark">&#x2714;</div>
-        <div><h4>Deterministic Review Gate</h4><p>Every AI-generated output passes through a mandatory review step before it reaches your repository. No code ships without human approval.</p></div>
+    <div class="guarantee-grid">
+      <div class="guard-card">
+        <div class="shield">&#x1F6E1;</div>
+        <div class="body">
+          <div class="badge">Gate 01</div>
+          <h4>Deterministic Review Gate</h4>
+          <p>Every AI-generated output passes through a mandatory review step before it reaches your repository. No code ships without human approval.</p>
+        </div>
       </div>
-      <div class="guarantee-item">
-        <div class="mark">&#x2714;</div>
-        <div><h4>Task Isolation</h4><p>Each agent operates in a sandboxed context. A failure in one agent cannot cascade into another. Errors are contained and reported immediately.</p></div>
+      <div class="guard-card">
+        <div class="shield">&#x1F300;</div>
+        <div class="body">
+          <div class="badge">Gate 02</div>
+          <h4>Task Isolation</h4>
+          <p>Each agent operates in a sandboxed context. A failure in one agent cannot cascade into another. Errors are contained and reported immediately.</p>
+        </div>
       </div>
-      <div class="guarantee-item">
-        <div class="mark">&#x2714;</div>
-        <div><h4>Rollback-Ready Deployments</h4><p>Every deployment is versioned. If an agent produces a faulty output, you can roll back to the last known-good state in one click.</p></div>
+      <div class="guard-card">
+        <div class="shield">&#x1F504;</div>
+        <div class="body">
+          <div class="badge">Gate 03</div>
+          <h4>Rollback-Ready Deployments</h4>
+          <p>Every deployment is versioned. If an agent produces a faulty output, you can roll back to the last known-good state in one click.</p>
+        </div>
       </div>
-      <div class="guarantee-item">
-        <div class="mark">&#x2714;</div>
-        <div><h4>Real-Time Human Override</h4><p>You can pause, redirect, or terminate any agent mid-task. Full control, always. No black-box autonomy.</p></div>
+      <div class="guard-card">
+        <div class="shield">&#x1F6AB;</div>
+        <div class="body">
+          <div class="badge">Gate 04</div>
+          <h4>Real-Time Human Override</h4>
+          <p>You can pause, redirect, or terminate any agent mid-task. Full control, always. No black-box autonomy.</p>
+        </div>
       </div>
     </div>
   </div>
