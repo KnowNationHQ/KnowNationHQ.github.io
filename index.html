@@ -980,7 +980,7 @@
       </div>
       <div class="form-card">
         <div class="head"><span class="dot"></span><h3>Send Your Brief</h3></div>
-        <form id="contactForm" action="https://formspree.io/f/xvgkzodo" method="POST">
+        <form id="contactForm" action="https://formsubmit.co/ajax/officialknownation@gmail.com" method="POST">
           <div class="form-row half">
             <div class="fld">
               <input type="text" id="fn" name="name" placeholder=" " required>
@@ -1011,6 +1011,7 @@
             <label for="msg">Describe your project...</label>
           </div>
           <input type="hidden" name="_subject" value="New Project Enquiry">
+          <input type="hidden" name="_captcha" value="false">
           <button type="submit" class="btn btn-primary">Submit Brief &rarr;</button>
           <div class="form-error" id="formError">&#x26A0; Send failed. Email us at <a href="mailto:officialknownation@gmail.com">officialknownation@gmail.com</a></div>
         </form>
@@ -1085,8 +1086,8 @@ if(form){
     e.preventDefault();
     const btn=form.querySelector('button[type="submit"]');
     btn.textContent='Sending...';btn.disabled=true;
-    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-      .then(r=>{if(r.ok){form.querySelector('.form-success').classList.add('show');form.style.display='none'}else throw Error()})
+    fetch(form.action,{method:'POST',body:new FormData(form)})
+      .then(r=>r.json()).then(d=>{if(d.success){form.querySelector('.form-success').classList.add('show');form.style.display='none'}else throw Error()})
       .catch(()=>{btn.textContent='Submit Brief \u2192';btn.disabled=false;document.getElementById('formError').classList.add('show')})
   })
 }
