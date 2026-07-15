@@ -1001,7 +1001,10 @@
       </div>
       <div class="form-card">
         <div class="head"><span class="dot"></span><h3>Send Your Brief</h3></div>
-        <form id="contactForm" action="https://formsubmit.co/officialknownation@gmail.com" method="POST">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+          <input type="hidden" name="subject" value="KnowNation Project Inquiry">
+          <input type="hidden" name="from_name" value="KnowNation Website">
           <div class="form-row half">
             <div class="fld">
               <input type="text" id="fn" name="name" placeholder=" " required>
@@ -1031,9 +1034,7 @@
             <textarea id="msg" name="message" placeholder=" " required></textarea>
             <label for="msg">Describe your project...</label>
           </div>
-          <input type="hidden" name="_subject" value="New Project Enquiry">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://knownationhq.github.io/?sent=true">
           <button type="submit" class="btn btn-primary">Submit Brief &rarr;</button>
           <div class="form-error" id="formError">&#x26A0; Send failed. Email us at <a href="mailto:officialknownation@gmail.com">officialknownation@gmail.com</a></div>
         </form>
@@ -1103,15 +1104,31 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 const form=document.getElementById('contactForm');
+const formError=document.getElementById('formError');
+const formSuccess=document.getElementById('formSuccess');
 if(form){
   form.addEventListener('submit',function(e){
+    e.preventDefault();
+    formError.classList.remove('show');
     const btn=form.querySelector('button[type="submit"]');
-    btn.textContent='Sending...';btn.disabled=true
+    btn.textContent='Sending...';btn.disabled=true;
+    const data=new FormData(form);
+    fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+      .then(r=>r.json())
+      .then(d=>{
+        if(d.success){
+          form.style.display='none';
+          formSuccess.classList.add('show')
+        }else{
+          formError.classList.add('show');
+          btn.textContent='Submit Brief \u2192';btn.disabled=false
+        }
+      })
+      .catch(()=>{
+        formError.classList.add('show');
+        btn.textContent='Submit Brief \u2192';btn.disabled=false
+      })
   })
-}
-if(location.search.includes('sent=true')){
-  const f=document.getElementById('contactForm');
-  if(f){f.querySelector('.form-success').classList.add('show');f.style.display='none'}
 }
 </script>
 
