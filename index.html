@@ -389,37 +389,41 @@
     .contact-card .val{font-size:0.82rem;color:#fff;font-weight:500}
     .contact-card a.val:hover{color:var(--accent)}
     /* Form card */
-    .form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px 20px;animation:fadeUp 0.5s ease-out 0.1s both}
-    .form-card .head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
-    .form-card .head .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulseGlow 2s ease-in-out infinite}
-    .form-card .head h3{font-size:1rem;font-weight:700;color:#fff}
-    .form-row{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
-    .form-row.half{display:grid;grid-template-columns:1fr;gap:12px}
+    .form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px 20px;animation:fadeUp 0.5s ease-out 0.1s both;position:relative}
+    .form-card::before{content:'';position:absolute;top:0;left:20px;right:20px;height:2px;background:var(--grad-mix);border-radius:14px 14px 0 0;opacity:0.5}
+    .form-card .head{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.04)}
+    .form-card .head .dot{width:10px;height:10px;border-radius:50%;background:var(--grad-accent);animation:pulseGlow 2s ease-in-out infinite;flex-shrink:0}
+    .form-card .head h3{font-size:1rem;font-weight:700;color:#fff;letter-spacing:-0.02em}
+    .form-card .head .sub{font-size:0.72rem;color:var(--text-light);margin-left:auto}
+    .form-row{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+    .form-row.half{display:grid;grid-template-columns:1fr;gap:14px}
     .form-card .fld{position:relative}
-    .form-card .fld input,.form-card .fld select,.form-card .fld textarea{width:100%;padding:14px 14px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#fff;font-size:0.88rem;font-family:inherit;transition:border-color 0.3s,box-shadow 0.3s;outline:none;-webkit-appearance:none}
+    .form-card .fld input,.form-card .fld select,.form-card .fld textarea{width:100%;padding:16px 16px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#fff;font-size:0.9rem;font-family:inherit;transition:border-color 0.3s,box-shadow 0.3s,background 0.3s;outline:none;-webkit-appearance:none}
     .form-card .fld select option{background:var(--bg-dark);color:#fff}
-    .form-card .fld textarea{min-height:90px;resize:vertical;padding-top:16px}
-    .form-card .fld input:focus,.form-card .fld select:focus,.form-card .fld textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(8,145,178,0.08)}
-    .form-card .fld label{position:absolute;left:14px;top:14px;font-size:0.82rem;color:var(--text-light);pointer-events:none;transition:all 0.2s ease;background:transparent;padding:0 4px}
-    .form-card .fld input:focus+label,.form-card .fld input:not(:placeholder-shown)+label,.form-card .fld textarea:focus+label,.form-card .fld textarea:not(:placeholder-shown)+label,.form-card .fld select:focus+label{top:-1px;font-size:0.6rem;color:var(--accent);background:var(--bg-dark)}
+    .form-card .fld textarea{min-height:110px;resize:vertical;padding-top:18px}
+    .form-card .fld input:focus,.form-card .fld select:focus,.form-card .fld textarea:focus{border-color:rgba(8,145,178,0.3);background:rgba(255,255,255,0.05);box-shadow:0 0 0 4px rgba(8,145,178,0.06)}
+    .form-card .fld label{position:absolute;left:16px;top:16px;font-size:0.85rem;color:rgba(241,245,249,0.35);pointer-events:none;transition:all 0.2s ease;background:transparent;padding:0 4px;line-height:1}
+    .form-card .fld input:focus+label,.form-card .fld input:not(:placeholder-shown)+label,.form-card .fld textarea:focus+label,.form-card .fld textarea:not(:placeholder-shown)+label,.form-card .fld select:focus+label{top:-8px;font-size:0.65rem;color:var(--accent);background:var(--bg-dark);padding:0 6px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase}
     .form-card .fld input::placeholder,.form-card .fld textarea::placeholder{color:transparent}
-    .form-card .fld select+label{top:-1px;font-size:0.6rem;color:var(--text-light)}
+    .form-card .fld select+label{top:-8px;font-size:0.65rem;color:rgba(241,245,249,0.25);background:var(--bg-dark);padding:0 6px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase}
     .form-card .fld select:focus+label{color:var(--accent)}
-    .form-card .btn{width:100%;justify-content:center;margin-top:4px}
-    .form-success{display:none;text-align:center;padding:20px}
+    .form-card .btn{width:100%;justify-content:center;margin-top:6px;padding:16px 28px;font-size:0.95rem;font-weight:700;letter-spacing:0.02em}
+    .form-success{display:none;text-align:center;padding:40px 20px}
     .form-success.show{display:block;animation:fadeUp 0.4s ease-out}
-    .form-success .ico{font-size:2rem;margin-bottom:10px}
-    .form-success h3{font-size:1rem;margin-bottom:4px;color:#fff}
-    .form-success p{color:var(--text-light);font-size:0.85rem}
-    .form-error{display:none;text-align:center;padding:12px;margin-top:8px;font-size:0.8rem;color:var(--warm);background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.1);border-radius:8px}
+    .form-success .ico{width:48px;height:48px;border-radius:50%;background:rgba(8,145,178,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.4rem}
+    .form-success h3{font-size:1.1rem;margin-bottom:4px;color:#fff;font-weight:700}
+    .form-success p{color:var(--text-light);font-size:0.85rem;max-width:300px;margin:0 auto}
+    .form-error{display:none;text-align:center;padding:12px 16px;margin-top:10px;font-size:0.8rem;color:#F59E0B;background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.1);border-radius:10px;line-height:1.6}
     .form-error.show{display:block;animation:fadeUp 0.3s ease-out}
-    .form-error a{color:var(--warm);text-decoration:underline;font-weight:600}
+    .form-error a{color:#F59E0B;text-decoration:underline;font-weight:600}
     @media(min-width:640px){
-      .form-row.half{grid-template-columns:1fr 1fr}
+      .form-row.half{grid-template-columns:1fr 1fr;gap:16px}
     }
     @media(min-width:900px){
       .contact-panel{grid-template-columns:1fr 1.6fr;gap:28px}
-      .form-card{padding:28px 26px}
+      .form-card{padding:32px 28px}
+      .form-card .head{margin-bottom:24px}
+      .form-row{gap:16px;margin-bottom:18px}
     }
 
     /* Footer */
@@ -1000,7 +1004,7 @@
         </a>
       </div>
       <div class="form-card">
-        <div class="head"><span class="dot"></span><h3>Send Your Brief</h3></div>
+        <div class="head"><span class="dot"></span><h3>Send Your Brief</h3><span class="sub">All fields required</span></div>
         <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value="586bd350-044f-4ee0-9ff5-e4c483e36423">
           <input type="hidden" name="subject" value="KnowNation Project Inquiry">
