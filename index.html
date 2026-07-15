@@ -1005,11 +1005,7 @@
       </div>
       <div class="form-card">
         <div class="head"><span class="dot"></span><h3>Send Your Brief</h3><span class="sub">All fields required</span></div>
-        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="586bd350-044f-4ee0-9ff5-e4c483e36423">
-          <input type="hidden" name="subject" value="New Project Brief from website">
-          <input type="hidden" name="from_name" value="KnowNationHQ">
-          <input type="hidden" name="_captcha" value="false">
+        <form id="contactForm">
           <div class="form-row half">
             <div class="fld">
               <input type="text" id="fn" name="name" placeholder=" " required>
@@ -1064,7 +1060,9 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+emailjs.init('j6tA1XZ5GpMHiEW9T')
 function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
 
 function toggleFaq(el){
@@ -1116,14 +1114,16 @@ if(form){
     formError.classList.remove('show');
     const btn=form.querySelector('button[type="submit"]');
     btn.textContent='Sending...';btn.disabled=true;
-    const data=new FormData(form);
-    fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
-      .then(r=>r.json())
-      .then(d=>{
-        if(d.success){form.style.display='none';formSuccess.classList.add('show')}
-        else{formError.classList.add('show');btn.textContent='Submit Brief \u2192';btn.disabled=false}
-      })
-      .catch(()=>{formError.classList.add('show');btn.textContent='Submit Brief \u2192';btn.disabled=false})
+    const fd=new FormData(form);
+    emailjs.send('service_xs36uvg','template_kwupg6r',{
+      name:fd.get('name'),email:fd.get('email'),
+      company:fd.get('company'),budget:fd.get('budget'),
+      message:fd.get('message'),from_name:'KnowNationHQ'
+    }).then(()=>{
+      form.style.display='none';formSuccess.classList.add('show')
+    }).catch(()=>{
+      formError.classList.add('show');btn.textContent='Submit Brief \u2192';btn.disabled=false
+    })
   })
 }
 </script>
